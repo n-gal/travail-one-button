@@ -4,26 +4,51 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Transform webRayTransform;
     private HingeJoint2D webHinge;
-    private bool hingeEnabled;
+    private bool webIsActive;
 
-    // Start is called before the first frame update
     void Start()
     {
         webHinge = GetComponent<HingeJoint2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown("space"))
         {
-            print("test");
-            webHinge.enabled = true;
+            if (!webIsActive)
+            {
+                Ray ray = new Ray(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up));
+
+                int targetLayerMask = 1 << LayerMask.NameToLayer("WebWall");
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, targetLayerMask);
+
+                if (hit.collider != null)
+                {
+                    webHinge.enabled = true;
+                    webHinge.connectedAnchor = hit.point;
+                    webHinge.anchor = transform.InverseTransformPoint(hit.point);
+                    hit = null;
+                }
+                webIsActive = true;
+            }
+            else
+            {
+                // Draw debug ray
+                Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
+            }
         }
         if (Input.GetKeyUp("space"))
         {
             webHinge.enabled = false;
+            webIsActive = false;
         }
     }
+    Vector3 AnchorWorldPosition()
+    {
+        return transform.TransformPoint(webHinge.anchor);
+    }
 }
+
+
