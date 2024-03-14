@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public Transform webRayTransform;
     private HingeJoint2D webHinge;
     private bool webIsActive;
+    private bool webIsConnected;
 
     void Start()
     {
@@ -29,7 +30,6 @@ public class Player : MonoBehaviour
                     webHinge.enabled = true;
                     webHinge.connectedAnchor = hit.point;
                     webHinge.anchor = transform.InverseTransformPoint(hit.point);
-                    hit = null;
                 }
                 webIsActive = true;
             }
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
             {
                 // Draw debug ray
                 Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
+
             }
         }
         if (Input.GetKeyUp("space"))
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
             webHinge.enabled = false;
             webIsActive = false;
         }
+        print(webIsActive);
     }
     Vector3 AnchorWorldPosition()
     {
