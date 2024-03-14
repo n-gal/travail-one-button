@@ -35,8 +35,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                // Draw debug ray
-                Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
+
 
             }
         }
@@ -46,6 +45,8 @@ public class Player : MonoBehaviour
             webIsActive = false;
         }
         print(webIsActive);
+        // Draw debug ray
+        Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
     }
     Vector3 AnchorWorldPosition()
     {
