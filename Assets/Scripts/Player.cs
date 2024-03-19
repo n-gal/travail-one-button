@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject particlePrefab;
     public Transform webRayTransform;
     private HingeJoint2D webHinge;
     private bool webIsActive;
@@ -13,7 +15,10 @@ public class Player : MonoBehaviour
     {
         webHinge = GetComponent<HingeJoint2D>();
     }
-
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     void Update()
     {
         if (Input.GetKeyDown("space"))
@@ -30,6 +35,7 @@ public class Player : MonoBehaviour
                     webHinge.enabled = true;
                     webHinge.connectedAnchor = hit.point;
                     webHinge.anchor = transform.InverseTransformPoint(hit.point);
+                    Instantiate(particlePrefab, hit.point, Quaternion.identity);
                 }
                 webIsActive = true;
             }
@@ -44,7 +50,6 @@ public class Player : MonoBehaviour
             webHinge.enabled = false;
             webIsActive = false;
         }
-        print(webIsActive);
         // Draw debug ray
         Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
     }
