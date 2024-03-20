@@ -23,4 +23,27 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit");
         Application.Quit();
     }
+
+    public void PauseGame()
+    {
+        Debug.Log("Pause");
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Debug.Log("Resume");
+        Time.timeScale = 1;
+    }
+
+    public void RestartGame()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+        Time.timeScale = 1;
+
+
+    }
+
+
 }
