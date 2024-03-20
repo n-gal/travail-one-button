@@ -41,8 +41,12 @@ public class MainMenu : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
         Time.timeScale = 1;
+    }
 
-
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
     }
 
 
