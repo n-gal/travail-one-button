@@ -8,6 +8,7 @@ public class MenuActivator : MonoBehaviour
 {
     private bool isGamePaused = false;
     public GameObject menu;
+   
     
     
     void Start()
@@ -18,7 +19,7 @@ public class MenuActivator : MonoBehaviour
     void Update()
     {
        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+       {
             if (!isGamePaused)
             {
                 Debug.Log("Pause");
@@ -36,7 +37,14 @@ public class MenuActivator : MonoBehaviour
                 menu.SetActive(false);
             }
            
-        }
+       }
        
     }
+    public void isDead()
+    {
+        menu.SetActive(true);
+        isGamePaused = true;
+
+    }
+
 }

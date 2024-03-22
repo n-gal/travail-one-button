@@ -10,14 +10,21 @@ public class Player : MonoBehaviour
     private HingeJoint2D webHinge;
     private bool webIsActive;
     private bool webIsConnected;
+    private MenuActivator menuActivator;
+    public GameObject escapeMenuManager;
+    
 
     void Start()
     {
         webHinge = GetComponent<HingeJoint2D>();
+        menuActivator = escapeMenuManager.GetComponent<MenuActivator>();
+
+
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(PlayerDeathSequence());
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void Update()
     {
@@ -56,6 +63,11 @@ public class Player : MonoBehaviour
     Vector3 AnchorWorldPosition()
     {
         return transform.TransformPoint(webHinge.anchor);
+    }
+    IEnumerator PlayerDeathSequence()
+    {
+        yield return new WaitForSeconds(1f);
+        menuActivator.isDead();
     }
 }
 
