@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Player : MonoBehaviour
     private bool webIsConnected;
     private MenuActivator menuActivator;
     public GameObject escapeMenuManager;
+    public GameObject playerVisual;
+    public ParticleSystem deathEffect;
+    public GameObject player;
     
 
     void Start()
@@ -21,9 +25,14 @@ public class Player : MonoBehaviour
 
 
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine(PlayerDeathSequence());
+        Instantiate(deathEffect,transform.position,Quaternion.identity);
+        player.SetActive(false);
+        //deathEffect.Emit(1);
+        menuActivator.isDead();
+        //StartCoroutine(PlayerDeathSequence());
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     void Update()
@@ -59,6 +68,7 @@ public class Player : MonoBehaviour
         }
         // Draw debug ray
         Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
+
     }
     Vector3 AnchorWorldPosition()
     {
@@ -66,7 +76,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator PlayerDeathSequence()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         menuActivator.isDead();
     }
 }

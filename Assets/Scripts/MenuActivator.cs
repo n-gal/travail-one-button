@@ -8,7 +8,9 @@ public class MenuActivator : MonoBehaviour
 {
     private bool isGamePaused = false;
     public GameObject menu;
-   
+    public GameObject Deathscreen;
+    public GameObject player;
+  
     
     
     void Start()
@@ -18,7 +20,7 @@ public class MenuActivator : MonoBehaviour
 
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Escape))
+       if (Input.GetKeyDown(KeyCode.Escape)&&player.active==true)
        {
             if (!isGamePaused)
             {
@@ -42,9 +44,14 @@ public class MenuActivator : MonoBehaviour
     }
     public void isDead()
     {
-        menu.SetActive(true);
+        Deathscreen.SetActive(true);
         isGamePaused = true;
+        
+        
+        //player.SetActive(false);
+       
 
     }
+
 
 }
