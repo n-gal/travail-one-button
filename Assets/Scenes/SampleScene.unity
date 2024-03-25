@@ -2087,6 +2087,8 @@ MonoBehaviour:
   followTarget: {fileID: 1862133148}
   zOffset: -10
   smoothness: 6
+  cameraSizeSmoothness: 2
+  player: {fileID: 443599619}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

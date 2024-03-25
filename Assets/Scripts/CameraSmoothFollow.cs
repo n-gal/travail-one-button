@@ -6,22 +6,30 @@ public class CameraSmoothFollow : MonoBehaviour
 {
     public Transform followTarget;
     public float zOffset;
-    public float smoothness = 0.5f; // Adjust this to control the smoothness of the interpolation
+    public float smoothness = 0.5f;
+    public float cameraSizeSmoothness = 0.5f;
+    public GameObject player;
+    private Rigidbody2D playerRB;
+    private Camera cameraC;
     private Vector3 targetPosition;
     private Vector3 relativePositionToTarget;
+    private float defaultProjectionSize;
 
     void Start()
     {
+        cameraC = this.GetComponent<Camera>();
+        playerRB = player.GetComponent<Rigidbody2D>();
         relativePositionToTarget = transform.position - followTarget.position;
         targetPosition = followTarget.position + relativePositionToTarget;
+        defaultProjectionSize = cameraC.orthographicSize;
     }
 
     void Update()
     {
-        // Compute the target position including the offset
         targetPosition = followTarget.position + relativePositionToTarget;
+        float targetOrthographicSize = defaultProjectionSize + (playerRB.velocity.x / 2 + Mathf.Abs(playerRB.velocity.y) / 4);
+        cameraC.orthographicSize = Mathf.Lerp(cameraC.orthographicSize, targetOrthographicSize, cameraSizeSmoothness * Time.deltaTime);
 
-        // Interpolate towards the target position
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, transform.position.y, followTarget.position.z + zOffset);
     }
