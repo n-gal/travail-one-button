@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public GameObject playerVisual;
     public ParticleSystem deathEffect;
     public GameObject player;
-    
+    public bool isDead=false;
 
     void Start()
     {
@@ -28,13 +28,41 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Instantiate(deathEffect,transform.position,Quaternion.identity);
-        player.SetActive(false);
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         //deathEffect.Emit(1);
         menuActivator.isDead();
+        player.SetActive(false);
         //StartCoroutine(PlayerDeathSequence());
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+
+
     }
+
+    //private void OnCollisionEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player"))
+    //    {
+    //        // Accès au transform du joueur
+    //        Transform playerTransform = collision.transform;
+
+    //        // Création des particules de mort à la position du joueur
+    //        if (deathEffect != null)
+    //        {
+    //            Instantiate(deathEffect, playerTransform.position, Quaternion.identity);
+    //        }
+
+    //        // Destruction du joueur
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
+
+    //private void Die() 
+    //{
+    //    isDead = true;
+    //    Instantiate(deathEffect, transform.position, Quaternion.identity);
+    //    gameObject.SetActive(false);
+    //}
     void Update()
     {
         if (Input.GetKeyDown("space"))
@@ -76,7 +104,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator PlayerDeathSequence()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         menuActivator.isDead();
     }
 }
