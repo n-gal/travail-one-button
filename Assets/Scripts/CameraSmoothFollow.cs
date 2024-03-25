@@ -14,6 +14,7 @@ public class CameraSmoothFollow : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 relativePositionToTarget;
     private float defaultProjectionSize;
+    private float targetOrthographicSize;
 
     void Start()
     {
@@ -27,9 +28,17 @@ public class CameraSmoothFollow : MonoBehaviour
     void Update()
     {
         targetPosition = followTarget.position + relativePositionToTarget;
-        float targetOrthographicSize = defaultProjectionSize + (playerRB.velocity.x / 2 + Mathf.Abs(playerRB.velocity.y) / 4);
-        cameraC.orthographicSize = Mathf.Lerp(cameraC.orthographicSize, targetOrthographicSize, cameraSizeSmoothness * Time.deltaTime);
+        print(playerRB.velocity);
+        if(Mathf.Abs(playerRB.velocity.x) < 35)
+        {
+            targetOrthographicSize = defaultProjectionSize + (Mathf.Abs(playerRB.velocity.x) / 4 + Mathf.Abs(playerRB.velocity.y) / 6);
 
+        }
+        else
+        {
+            targetOrthographicSize = defaultProjectionSize + (Mathf.Abs(playerRB.velocity.x) / 3 + Mathf.Abs(playerRB.velocity.y) / 4);
+        }
+        cameraC.orthographicSize = Mathf.Lerp(cameraC.orthographicSize, targetOrthographicSize, cameraSizeSmoothness * Time.deltaTime);
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, transform.position.y, followTarget.position.z + zOffset);
     }
