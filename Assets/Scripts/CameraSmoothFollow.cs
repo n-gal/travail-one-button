@@ -28,7 +28,6 @@ public class CameraSmoothFollow : MonoBehaviour
     void Update()
     {
         targetPosition = followTarget.position + relativePositionToTarget;
-        print(playerRB.velocity);
         if(Mathf.Abs(playerRB.velocity.x) < 35)
         {
             targetOrthographicSize = defaultProjectionSize + (Mathf.Abs(playerRB.velocity.x) / 4 + Mathf.Abs(playerRB.velocity.y) / 6);
