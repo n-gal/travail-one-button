@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public float newHingeSpeed = -500f;
     public float newHingeTorque = 1500f;
 
+    public GameObject escapeMenuManager;
+
     private float oldHingeSpeed;
     private float oldHingeTorque;
     private BoxCollider2D playerCollider;
@@ -30,10 +32,13 @@ public class Player : MonoBehaviour
     private TrailRenderer playerTrail;
     private Gradient oldTrailColour;
 
+    private MenuActivator menuActivator;
+
 
 
     void Start()
     {
+        menuActivator = escapeMenuManager.GetComponent<MenuActivator>();
         playerTrail = playerVisual.GetComponent<TrailRenderer>();
         playerRigidBody = this.GetComponent<Rigidbody2D>();
         playerCollider = this.GetComponent<BoxCollider2D>();
@@ -158,7 +163,8 @@ public class Player : MonoBehaviour
         isDead = true;
         Instantiate(detachmentParticle, raycastMemory, Quaternion.identity);
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        menuActivator.isDead();
     }
 }
 
