@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         menuActivator = escapeMenuManager.GetComponent<MenuActivator>();
         playerTrail = playerVisual.GetComponent<TrailRenderer>();
@@ -70,18 +70,11 @@ public class Player : MonoBehaviour
 
                     if (hit.collider != null && !hit.collider.CompareTag("SpeedUpWall"))
                     {
-                        webHinge.enabled = true;
-                        webHinge.connectedAnchor = hit.point;
-                        webHinge.anchor = transform.InverseTransformPoint(hit.point);
-                        Instantiate(attachmentParticle, hit.point, Quaternion.identity);
+                        ConnectWebHinge(hit);
                     }
                     else if (hit.collider != null)
                     {
-                        print("GRAHH");
-                        webHinge.enabled = true;
-                        webHinge.connectedAnchor = hit.point;
-                        webHinge.anchor = transform.InverseTransformPoint(hit.point);
-                        Instantiate(attachmentParticle, hit.point, Quaternion.identity);
+                        ConnectWebHinge(hit);
 
                         JointMotor2D newMotor = webHinge.motor;
                         newMotor.motorSpeed = newHingeSpeed;
@@ -110,8 +103,6 @@ public class Player : MonoBehaviour
 
                 playerTrail.colorGradient = oldTrailColour;
             }
-            // Draw debug ray
-            //Debug.DrawRay(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up) * 10f, Color.green);
         }
     }
     void DrawTarget()
@@ -125,8 +116,8 @@ public class Player : MonoBehaviour
                     isAttached = false;
                     Instantiate(detachmentParticle, raycastMemory, Quaternion.identity);
                 }
-                Ray ray = new Ray(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up));
 
+                Ray ray = new Ray(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up));
                 int targetLayerMask = 1 << LayerMask.NameToLayer("WebWall");
                 RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, targetLayerMask);
 
@@ -136,6 +127,7 @@ public class Player : MonoBehaviour
                     raycastMemory = new Vector3(hit.point.x, hit.point.y, -3);
                 }
                 return;
+
             }
             isAttached = true;
             webTarget.transform.position = raycastMemory;
@@ -156,15 +148,20 @@ public class Player : MonoBehaviour
         Slice2RB.AddForce(playerRigidBody.velocity * 50);
         Slice1RB.MoveRotation(Random.Range(0f, 2000f));
         Slice2RB.MoveRotation(Random.Range(0f,2000f));
-
-        //playerCollider.size = new Vector2(1, 1);
         Instantiate(deathParticle, this.transform.position, Quaternion.identity);
         webHinge.enabled = false;
         isDead = true;
         Instantiate(detachmentParticle, raycastMemory, Quaternion.identity);
-        yield return new WaitForSeconds(2f);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        yield return new WaitForSeconds(1.5f);
         menuActivator.isDead();
+    }
+
+    void ConnectWebHinge(RaycastHit2D hit)
+    {
+        webHinge.enabled = true;
+        webHinge.connectedAnchor = hit.point;
+        webHinge.anchor = transform.InverseTransformPoint(hit.point);
+        Instantiate(attachmentParticle, hit.point, Quaternion.identity);
     }
 }
 
