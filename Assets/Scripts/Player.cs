@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         webHinge.enabled = false;
         isDead = true;
         Instantiate(detachmentParticle, raycastMemory, Quaternion.identity);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         menuActivator.isDead();
     }
