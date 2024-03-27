@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float newHingeTorque = 1500f;
 
     public GameObject escapeMenuManager;
+    public bool godMod;
 
     private float oldHingeSpeed;
     private float oldHingeTorque;
@@ -49,9 +50,11 @@ public class Player : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!isDead)
-        {
-            StartCoroutine(DeathSequence());
+        if(!isDead&&!godMod)
+        {   
+        StartCoroutine(DeathSequence());
+        print("Dead");
+            
         }
     }
     void Update()
