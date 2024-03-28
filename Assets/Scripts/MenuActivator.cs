@@ -34,7 +34,7 @@ public class MenuActivator : MonoBehaviour
 
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Escape)&&player.active==true)
+       if (Input.GetKeyDown(KeyCode.Escape)&&player.activeSelf==true)
        {
             if (!isGamePaused)
             {
