@@ -16,8 +16,10 @@ public class CameraSmoothFollow : MonoBehaviour
     private float defaultProjectionSize;
     private float targetOrthographicSize;
 
+
     void Start()
-    {
+    {;
+
         cameraC = this.GetComponent<Camera>();
         playerRB = player.GetComponent<Rigidbody2D>();
         relativePositionToTarget = transform.position - followTarget.position;
@@ -27,6 +29,7 @@ public class CameraSmoothFollow : MonoBehaviour
 
     void Update()
     {
+
         targetPosition = followTarget.position + relativePositionToTarget;
         if(Mathf.Abs(playerRB.velocity.x) < 35)
         {
