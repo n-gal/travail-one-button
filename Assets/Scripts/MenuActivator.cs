@@ -22,9 +22,11 @@ public class MenuActivator : MonoBehaviour
         //autoRestartToggle.isOn = PlayerPrefs.GetInt(autoRestartString, 0) == 1;
         //autoRestartToggle.onValueChanged.AddListener(SaveToggleValue);
         toggleValue = PlayerPrefs.GetInt(autoRestartString, 0) == 1;
-        autoRestartToggle.isOn = toggleValue;
-        autoRestartToggle.onValueChanged.AddListener(SaveToggleValue);
-
+        if(autoRestartToggle)
+        {
+            autoRestartToggle.isOn = toggleValue;
+            autoRestartToggle.onValueChanged.AddListener(SaveToggleValue);
+        }
     }
     void SaveToggleValue(bool value)
     {
@@ -34,7 +36,7 @@ public class MenuActivator : MonoBehaviour
 
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Escape)&&player.active==true)
+       if (Input.GetKeyDown(KeyCode.Escape)&&player.activeSelf==true)
        {
             if (!isGamePaused)
             {

@@ -27,12 +27,13 @@ public class Player : MonoBehaviour
     private bool webIsActive;
     private Vector3 raycastMemory;
     private bool isAttached;
-    private bool isDead = false;
     private Rigidbody2D playerRigidBody;
     private TrailRenderer playerTrail;
     private Gradient oldTrailColour;
-
     private MenuActivator menuActivator;
+
+    [HideInInspector]
+    public bool isDead = false;
 
 
 
