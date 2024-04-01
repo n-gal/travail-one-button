@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public GameObject playerSlice2;
     public GameObject attachmentParticle;
     public GameObject detachmentParticle;
+    public GameObject portalParticle;
     public GameObject deathParticle;
     public GameObject webTarget;
     public Gradient speedUpColour;
@@ -55,6 +56,11 @@ public class Player : MonoBehaviour
             StartCoroutine(DeathSequence());
         }
     }
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        StartCoroutine(WinSequence());
+    }
+
     void Update()
     {
         DrawTarget();
@@ -126,9 +132,8 @@ public class Player : MonoBehaviour
                 {
                     webTarget.transform.position = new Vector3(hit.point.x, hit.point.y, -3);
                     raycastMemory = new Vector3(hit.point.x, hit.point.y, -3);
+                    return;
                 }
-                return;
-
             }
             isAttached = true;
             webTarget.transform.position = raycastMemory;
@@ -163,6 +168,15 @@ public class Player : MonoBehaviour
         webHinge.connectedAnchor = hit.point;
         webHinge.anchor = transform.InverseTransformPoint(hit.point);
         Instantiate(attachmentParticle, hit.point, Quaternion.identity);
+    }
+
+    IEnumerator WinSequence()
+    {
+        Quaternion originalRotation = Quaternion.Euler(0f, -90f, 90f);
+        Instantiate(portalParticle, this.transform.position, originalRotation);
+        playerRigidBody.AddForce(new Vector2(50000f, 0f));
+        yield return new WaitForSeconds(1f);
+        playerRigidBody.drag = 2;
     }
 }
 

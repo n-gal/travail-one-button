@@ -61,6 +61,7 @@ public class CameraSmoothFollow : MonoBehaviour
             targetChromaticStrength = 0f;
             targetOrthographicSize = defaultProjectionSize;
         }
+        Mathf.Clamp(targetOrthographicSize, 0f, 40f);
         volumeChromaticAberration.intensity.value = targetChromaticStrength;
         cameraC.orthographicSize = Mathf.Lerp(cameraC.orthographicSize, targetOrthographicSize, cameraSizeSmoothness * Time.deltaTime);
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothness * Time.deltaTime);
