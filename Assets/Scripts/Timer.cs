@@ -16,9 +16,11 @@ public class PlayerTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bestTime = PlayerPrefs.GetFloat("BestTime"+levelNumber,Mathf.Infinity);
-        bestTimeText.text = "Best time : " + bestTime.ToString("F2") +  " Sec";
-        timerText.text = timeStart.ToString("F2");
+       
+            bestTime = PlayerPrefs.GetFloat("BestTime" + levelNumber, Mathf.Infinity);
+            bestTimeText.text = "Best time : " + bestTime.ToString("F2") + " Sec";
+            timerText.text = timeStart.ToString("F2");
+       
     }
 
     // Update is called once per frame
@@ -44,7 +46,11 @@ public class PlayerTimer : MonoBehaviour
         if(timeStart<bestTime)
         {
             bestTime = timeStart;
-            PlayerPrefs.SetFloat("BestTime"+levelNumber, bestTime);
+
+           
+                PlayerPrefs.SetFloat("BestTime" + levelNumber, bestTime);
+          
+            
         }
     }
 
