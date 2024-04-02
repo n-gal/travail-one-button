@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerTimer : MonoBehaviour
 {
+    [SerializeField] int levelNumber;
     public float timeStart;
     public TMP_Text timerText;
     public TMP_Text bestTimeText;
@@ -15,7 +16,7 @@ public class PlayerTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bestTime = PlayerPrefs.GetFloat("BestTime",Mathf.Infinity);
+        bestTime = PlayerPrefs.GetFloat("BestTime"+levelNumber,Mathf.Infinity);
         bestTimeText.text = bestTime.ToString("F2");
         timerText.text = timeStart.ToString("F2");
     }
@@ -43,7 +44,7 @@ public class PlayerTimer : MonoBehaviour
         if(timeStart<bestTime)
         {
             bestTime = timeStart;
-            PlayerPrefs.SetFloat("BestTime", bestTime);
+            PlayerPrefs.SetFloat("BestTime"+levelNumber, bestTime);
         }
     }
 
