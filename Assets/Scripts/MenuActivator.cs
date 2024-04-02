@@ -15,7 +15,7 @@ public class MenuActivator : MonoBehaviour
     public GameObject player;
     public GameObject _timer;
     public GameObject winingScreen;
-
+    public GameObject resumeButton;
 
     public Toggle autoRestartToggle;
     private string autoRestartString = "AutoRestart";
@@ -65,6 +65,8 @@ public class MenuActivator : MonoBehaviour
     }
     public void isDead()
     {
+        resumeButton.SetActive(false);
+
         if (toggleValue == true)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

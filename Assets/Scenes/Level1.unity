@@ -14436,6 +14436,7 @@ MonoBehaviour:
   player: {fileID: 443599619}
   _timer: {fileID: 956778564}
   winingScreen: {fileID: 1893783223}
+  resumeButton: {fileID: 1891983792}
   autoRestartToggle: {fileID: 0}
   toggleValue: 0
 --- !u!4 &1767166230
