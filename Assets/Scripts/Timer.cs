@@ -26,7 +26,7 @@ public class PlayerTimer : MonoBehaviour
        
     }
 
-    public void PlayerAsWon() 
+    public void PlayerHasWon() 
     {
         timerActive = false;
     }
