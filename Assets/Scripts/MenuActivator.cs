@@ -12,15 +12,19 @@ public class MenuActivator : MonoBehaviour
     public GameObject menu;
     public GameObject Deathscreen;
     public GameObject player;
-
+    public GameObject _timer;
+    public GameObject winingScreen;
 
     public Toggle autoRestartToggle;
     private string autoRestartString = "AutoRestart";
+    private Timer timer;
     public bool toggleValue;
     private void Start()
     {
+
         //autoRestartToggle.isOn = PlayerPrefs.GetInt(autoRestartString, 0) == 1;
         //autoRestartToggle.onValueChanged.AddListener(SaveToggleValue);
+        timer = _timer.GetComponent<Timer>();
         toggleValue = PlayerPrefs.GetInt(autoRestartString, 0) == 1;
         if(autoRestartToggle)
         {
@@ -75,6 +79,13 @@ public class MenuActivator : MonoBehaviour
         //player.SetActive(false);
        
 
+    }
+
+    public void asWon()
+    {
+        Time.timeScale = 0;
+        winingScreen.SetActive(true);
+        timer.playerAsWon();
     }
 
 

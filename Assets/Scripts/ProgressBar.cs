@@ -10,11 +10,16 @@ public class ProgressBar : MonoBehaviour
 
     Image progressBar;
     float maxDistance;
+    public GameObject winingScreen;
+
+    public GameObject escapeMenuManager;
+    private MenuActivator menuActivator;
     void Start()
     {
         progressBar = GetComponent<Image>();
         maxDistance = FinishLine.transform.position.x;
         progressBar.fillAmount = Player.transform.position.x / maxDistance;
+        menuActivator = escapeMenuManager.GetComponent<MenuActivator>();
     }
 
     // Update is called once per frame
@@ -23,6 +28,14 @@ public class ProgressBar : MonoBehaviour
         if (progressBar.fillAmount < 1)
         {
             progressBar.fillAmount = Player.transform.position.x / maxDistance;
+        }
+
+        if (progressBar.fillAmount == 1) 
+        {
+            //Time.timeScale = 0;
+            Debug.Log("You Win !");
+            //winingScreen.SetActive(true);
+            menuActivator.asWon();
         }
     }
 }
