@@ -17,7 +17,7 @@ public class PlayerTimer : MonoBehaviour
     void Start()
     {
         bestTime = PlayerPrefs.GetFloat("BestTime"+levelNumber,Mathf.Infinity);
-        bestTimeText.text = bestTime.ToString("F2");
+        bestTimeText.text = "Best time : " + bestTime.ToString("F2") +  " Sec";
         timerText.text = timeStart.ToString("F2");
     }
 
