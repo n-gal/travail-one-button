@@ -11,6 +11,7 @@ public class PlayerTimer : MonoBehaviour
     public TMP_Text bestTimeText;
     bool timerActive = true;
     public float bestTime =50f;
+    public GameObject highScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,11 @@ public class PlayerTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (bestTime == Mathf.Infinity) 
+        {
+            highScore.SetActive(false);
+        }
+
         if (timerActive==true)
         {
             timeStart += Time.deltaTime;

@@ -9065,6 +9065,7 @@ MonoBehaviour:
   timerText: {fileID: 956778567}
   bestTimeText: {fileID: 265916867}
   bestTime: Infinity
+  highScore: {fileID: 265916865}
 --- !u!114 &956778567
 MonoBehaviour:
   m_ObjectHideFlags: 0
