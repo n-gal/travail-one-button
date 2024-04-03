@@ -18,9 +18,12 @@ public class Player : MonoBehaviour
     public Transform webRayTransform;
     public float newHingeSpeed = -500f;
     public float newHingeTorque = 1500f;
+    public GameObject webLineObject;
+    public float webLineSpeed = 50f;
 
     public GameObject escapeMenuManager;
-
+    private LineRenderer webLine;
+    private bool canSeeWall;
     private float oldHingeSpeed;
     private float oldHingeTorque;
     private BoxCollider2D playerCollider;
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour
     private TrailRenderer playerTrail;
     private Gradient oldTrailColour;
     private MenuActivator menuActivator;
+    private bool webLineIsWindingUp;
 
     [HideInInspector]
     public bool isDead = false;
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        webLine = webLineObject.GetComponent<LineRenderer>();
         menuActivator = escapeMenuManager.GetComponent<MenuActivator>();
         playerTrail = playerVisual.GetComponent<TrailRenderer>();
         playerRigidBody = this.GetComponent<Rigidbody2D>();
@@ -63,6 +68,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        UpdateWeb();
         DrawTarget();
         if (!isDead)
         {
@@ -132,18 +138,27 @@ public class Player : MonoBehaviour
                 {
                     webTarget.transform.position = new Vector3(hit.point.x, hit.point.y, -3);
                     raycastMemory = new Vector3(hit.point.x, hit.point.y, -3);
+                    canSeeWall = true;
                     return;
                 }
+                else
+                {
+                    canSeeWall = false;
+                }
             }
-            isAttached = true;
-            webTarget.transform.position = raycastMemory;
-            return;
+            if(canSeeWall)
+            {
+                print("shoopanapa");
+                isAttached = true;
+                webTarget.transform.position = raycastMemory;
+                return;
+            }
         }
-
         webTarget.SetActive(false);
     }
     IEnumerator DeathSequence()
     {
+        isAttached = false;
         Rigidbody2D Slice1RB = playerSlice1.GetComponent<Rigidbody2D>();
         Rigidbody2D Slice2RB = playerSlice2.GetComponent<Rigidbody2D>();
         playerRigidBody.simulated = false;
@@ -164,19 +179,65 @@ public class Player : MonoBehaviour
 
     void ConnectWebHinge(RaycastHit2D hit)
     {
+        webLineIsWindingUp = true;
         webHinge.enabled = true;
         webHinge.connectedAnchor = hit.point;
         webHinge.anchor = transform.InverseTransformPoint(hit.point);
         Instantiate(attachmentParticle, hit.point, Quaternion.identity);
+
     }
 
     IEnumerator WinSequence()
     {
         Quaternion originalRotation = Quaternion.Euler(0f, -90f, 90f);
         Instantiate(portalParticle, this.transform.position, originalRotation);
-        playerRigidBody.AddForce(new Vector2(50000f, 0f));
+        playerRigidBody.AddForce(new Vector2(50000, 0));
         yield return new WaitForSeconds(1f);
         playerRigidBody.drag = 2;
+        yield return new WaitForSeconds(2f);
+        playerRigidBody.simulated = false;
+    }
+
+    void UpdateWeb()
+    {
+        if(webLineIsWindingUp)
+        {
+            webLine.SetPosition(1, playerVisual.transform.position);
+            webLineIsWindingUp = false;
+        }
+        if(isAttached)
+        {
+            webLineObject.SetActive(true);
+            SetWebPosition(playerVisual.transform.position, raycastMemory);
+        }
+        else if(webLineObject.activeSelf)
+        {
+            DetachWeb(playerVisual.transform.position);
+        }
+    }
+
+    void SetWebPosition(Vector3 playerPos, Vector3 webPos)
+    {
+        float playerTargetDistance = 1 / Vector3.Distance(playerPos, webPos) * 5;
+        playerTargetDistance = Mathf.Clamp(playerTargetDistance, 0.1f, 0.35f);
+        webLine.widthMultiplier = playerTargetDistance;
+        webLine.positionCount = 2;
+        webLine.SetPosition(0, playerPos);
+        Vector3 targetPos = webPos;
+        targetPos = Vector3.Lerp(webLine.GetPosition(1), targetPos, webLineSpeed * Time.deltaTime);
+        webLine.SetPosition(1, targetPos);
+    }
+    void DetachWeb(Vector3 playerPos)
+    {
+        webLine.positionCount = 2;
+        webLine.SetPosition(0, playerPos);
+
+        Vector3 targetPos = Vector3.Lerp(webLine.GetPosition(1), playerPos, webLineSpeed * Time.deltaTime);
+        webLine.SetPosition(1, targetPos);
+        if(webLine.GetPosition(1) == playerPos)
+        {
+            webLineObject.SetActive(false);
+        }
     }
 }
 

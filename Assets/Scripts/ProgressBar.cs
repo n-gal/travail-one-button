@@ -34,7 +34,7 @@ public class ProgressBar : MonoBehaviour
             //Time.timeScale = 0;
             Debug.Log("You Win !");
             //winingScreen.SetActive(true);
-            menuActivator.AsWon();
+            menuActivator.HasWon();
         }
     }
     

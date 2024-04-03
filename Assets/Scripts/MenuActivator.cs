@@ -83,7 +83,7 @@ public class MenuActivator : MonoBehaviour
        
 
     }
-    public void AsWon()
+    public void HasWon()
     {
         winingScreen.SetActive(true);
         timer.PlayerHasWon();
