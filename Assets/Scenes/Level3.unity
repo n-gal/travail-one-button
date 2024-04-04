@@ -9645,6 +9645,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: webAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 9af8325dbd63a434fb81c408722e23cc, type: 3}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1255785476}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
       propertyPath: newHingeTorque
       value: 20500
       objectReference: {fileID: 0}
@@ -9652,6 +9660,10 @@ PrefabInstance:
       propertyPath: escapeMenuManager
       value: 
       objectReference: {fileID: 1767166228}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: webDisconnectAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 9add69eb02949db41b613744b86e56ff, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

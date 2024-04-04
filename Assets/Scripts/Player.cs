@@ -20,8 +20,11 @@ public class Player : MonoBehaviour
     public float newHingeTorque = 1500f;
     public GameObject webLineObject;
     public float webLineSpeed = 50f;
-
+    public SoundManager2D soundManager;
     public GameObject escapeMenuManager;
+    public AudioClip webAudio;
+    public AudioClip webDisconnectAudio;
+
     private LineRenderer webLine;
     private bool canSeeWall;
     private float oldHingeSpeed;
@@ -128,6 +131,7 @@ public class Player : MonoBehaviour
                 {
                     isAttached = false;
                     Instantiate(detachmentParticle, raycastMemory, Quaternion.identity);
+                    soundManager.PlaySound(webDisconnectAudio);
                 }
 
                 Ray ray = new Ray(webRayTransform.position, webRayTransform.TransformDirection(Vector3.up));
@@ -148,7 +152,6 @@ public class Player : MonoBehaviour
             }
             if(canSeeWall)
             {
-                print("shoopanapa");
                 isAttached = true;
                 webTarget.transform.position = raycastMemory;
                 return;
@@ -204,6 +207,7 @@ public class Player : MonoBehaviour
         {
             webLine.SetPosition(1, playerVisual.transform.position);
             webLineIsWindingUp = false;
+            soundManager.PlaySound(webAudio);
         }
         if(isAttached)
         {

@@ -6942,9 +6942,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: webAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 9af8325dbd63a434fb81c408722e23cc, type: 3}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 934399652}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: webLineSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
       propertyPath: escapeMenuManager
       value: 
       objectReference: {fileID: 1767166228}
+    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
+      propertyPath: webDisconnectAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 9add69eb02949db41b613744b86e56ff, type: 3}
     - target: {fileID: 7962086100520634622, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -8003,7 +8019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 506102207}
   Deathscreen: {fileID: 1569602796}
-  player: {fileID: 0}
+  player: {fileID: 961777475}
   _timer: {fileID: 1847678542}
   winingScreen: {fileID: 289837408}
   resumeButton: {fileID: 1891983792}
