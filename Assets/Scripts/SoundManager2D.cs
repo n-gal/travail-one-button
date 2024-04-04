@@ -8,7 +8,6 @@ public class SoundManager2D : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
         source = this.GetComponent<AudioSource>();
     }
 
