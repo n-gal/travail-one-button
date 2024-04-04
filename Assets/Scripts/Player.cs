@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     public GameObject escapeMenuManager;
     public AudioClip webAudio;
     public AudioClip webDisconnectAudio;
-    public AudioClip webDeathAudio;
 
     private LineRenderer webLine;
     private bool canSeeWall;
@@ -162,7 +161,6 @@ public class Player : MonoBehaviour
     }
     IEnumerator DeathSequence()
     {
-        soundManager.PlaySound(webDeathAudio);
         isAttached = false;
         Rigidbody2D Slice1RB = playerSlice1.GetComponent<Rigidbody2D>();
         Rigidbody2D Slice2RB = playerSlice2.GetComponent<Rigidbody2D>();

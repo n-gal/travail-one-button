@@ -9657,10 +9657,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1255785476}
     - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
-      propertyPath: webDeathAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: 76c49ebeba2fe874d9a453eb8237bad8, type: 3}
-    - target: {fileID: 7436303295507721884, guid: 4a5dbb6be7ae0f144ae6ef46e9139f54, type: 3}
       propertyPath: newHingeTorque
       value: 20500
       objectReference: {fileID: 0}
