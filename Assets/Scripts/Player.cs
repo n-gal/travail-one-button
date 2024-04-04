@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public GameObject escapeMenuManager;
     public AudioClip webAudio;
     public AudioClip webDisconnectAudio;
+    public AudioClip webDeathAudio;
+    public AudioClip winAudio;
 
     private LineRenderer webLine;
     private bool canSeeWall;
@@ -161,6 +163,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator DeathSequence()
     {
+        soundManager.PlaySound(webDeathAudio);
         isAttached = false;
         Rigidbody2D Slice1RB = playerSlice1.GetComponent<Rigidbody2D>();
         Rigidbody2D Slice2RB = playerSlice2.GetComponent<Rigidbody2D>();
@@ -192,6 +195,7 @@ public class Player : MonoBehaviour
 
     IEnumerator WinSequence()
     {
+        soundManager.PlaySound(winAudio);
         Quaternion originalRotation = Quaternion.Euler(0f, -90f, 90f);
         Instantiate(portalParticle, this.transform.position, originalRotation);
         playerRigidBody.AddForce(new Vector2(50000, 0));

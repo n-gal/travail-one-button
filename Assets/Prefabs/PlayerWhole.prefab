@@ -462,7 +462,12 @@ MonoBehaviour:
   newHingeTorque: 9500
   webLineObject: {fileID: 7962086100520634622}
   webLineSpeed: 50
+  soundManager: {fileID: 0}
   escapeMenuManager: {fileID: 0}
+  webAudio: {fileID: 8300000, guid: 9af8325dbd63a434fb81c408722e23cc, type: 3}
+  webDisconnectAudio: {fileID: 8300000, guid: 9add69eb02949db41b613744b86e56ff, type: 3}
+  webDeathAudio: {fileID: 8300000, guid: 31c1b559a9918be48b8dc985139635a1, type: 3}
+  winAudio: {fileID: 8300000, guid: c270f07f69f28a1459290d0f5269d76d, type: 3}
   isDead: 0
 --- !u!1 &3454622634158174150
 GameObject:
