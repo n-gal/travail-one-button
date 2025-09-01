@@ -16,6 +16,7 @@ public class MenuActivator : MonoBehaviour
     public GameObject _timer;
     public GameObject winingScreen;
     public GameObject resumeButton;
+    public GameObject OptionMenu;
 
     public Toggle autoRestartToggle;
     private string autoRestartString = "AutoRestart";
@@ -58,6 +59,7 @@ public class MenuActivator : MonoBehaviour
                 Time.timeScale = 1;
                 isGamePaused = false;
                 menu.SetActive(false);
+                OptionMenu.SetActive(false);
             }
            
        }
