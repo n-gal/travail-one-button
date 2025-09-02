@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         if (!isDead)
         {
 
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
             {
                 if (!webIsActive)
                 {
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
 
                 }
             }
-            if (Input.GetKeyUp("space"))
+            if (Input.GetKeyUp("space") || Input.GetMouseButtonUp(0))
             {
                 webHinge.enabled = false;
                 webIsActive = false;
